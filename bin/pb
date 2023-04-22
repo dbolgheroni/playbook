@@ -1,0 +1,54 @@
+#!/bin/sh
+
+lang=$1
+pbname=$2
+
+usage() {
+    echo "usage: $0 <lang> name" >&2
+}
+
+is_dir() {
+    dir=$1
+    if [ -d ${dir} ]; then
+        echo "${dir} directory already exists, not creating" >&2
+        exit 1
+    fi
+}
+
+copy_cpp_template() {
+    mkdir -p ${pbname}/obj
+    cp -r ${HOME}/.playbook/template/cpp/* ${pbname}
+}
+
+copy_py_template() {
+    mkdir -p ${pbname}/obj
+    cp -r ${HOME}/.playbook/template/py/* ${pbname}
+}
+
+
+main() {
+    # lang
+    if [ -z ${lang} ]; then
+        usage
+        exit 1
+    fi
+
+    # name
+    if [ -z ${pbname} ]; then
+        usage
+        exit 1
+    fi
+
+    is_dir ${pbname}
+
+    case ${lang} in
+        cpp)
+            copy_cpp_template ;;
+        py)
+            copy_py_template ;;
+        *)
+            echo unsupported lang playbook ;;
+    esac
+}
+
+main
