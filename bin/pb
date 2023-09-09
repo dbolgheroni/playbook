@@ -25,6 +25,14 @@ copy_py_template() {
     cp -r ${HOME}/.playbook/template/py/* ${pbname}
 }
 
+copy_template() {
+    local lang=$1
+
+    mkdir -p ${pbname}
+    create_pb_cmd="cp -r ${HOME}/.playbook/template/${lang}/* ${pbname}"
+    ${create_pb_cmd}
+}
+
 
 main() {
     # lang
@@ -46,6 +54,8 @@ main() {
             copy_cpp_template ;;
         py)
             copy_py_template ;;
+        go)
+            copy_template go ;;
         *)
             echo unsupported lang playbook ;;
     esac
