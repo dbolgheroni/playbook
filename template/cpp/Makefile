@@ -1,8 +1,7 @@
-CFLAGS = -Og -g -gdwarf-2 -c -Wall -Wno-unused -std=c++17 \
-		 -I/usr/local/include
+CFLAGS = -Og -g -gdwarf-2 -c -Wall -Wno-unused -std=c++20 \
+		 -I/usr/local/include -I$(.CURDIR)/include
 
-LDFLAGS = -pthread \
-		  -L/usr/local/lib
+LDFLAGS = -L/usr/local/lib
 
 .undef CC
 .ifndef CC
@@ -12,6 +11,7 @@ CC = clang++
 .SUFFIXES: .cpp .o
 .PHONY: clean
 .PATH: $(.CURDIR)/src
+.PATH: $(.CURDIR)/test
 
 # .OBJDIR tries to chdir(2) into MAKEOBJDIR only at startup. If it's created
 # later, it doesn't chdir(2) to .OBJDIR even if the macro is forced to a value.
