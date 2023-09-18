@@ -56,6 +56,8 @@ main() {
             copy_py_template ;;
         go)
             copy_template go ;;
+        cpp-cmake)
+            copy_template cpp-cmake ;;
         *)
             echo unsupported lang playbook ;;
     esac
